@@ -2,22 +2,20 @@
 
 """
 Created on Tue Aug 29 01:45:35 2017
-train a controversy predictive modle with ANN
-It has two layers:
-  (1) input layer has three nodes
-  (2) first layer has seven nodes
-  (3) output layer has one node
+训练一个两层的神经网络，用于预测争议性评分
+被注释掉的代码是用Logistics回归做的。
+可以对比两个模型的性能
 @author: Allen
 """
 import numpy 
 import tensorflow as tf
-from scipy.stats import logistic
+#from scipy.stats import logistic
     
 x1 = []
 z1 = []
 
 # read train file
-file = 'data/controversy.txt'
+file = 'D:/qjt/paper/emotionalSN/exp1710/controversy.txt'
 with open( file) as f:
     for line in f.readlines ():
         line = line.strip ()
@@ -28,8 +26,6 @@ with open( file) as f:
         x1.append(d[0:len(d)-1])
         z1.append(d[len(d)-1])
         
-#print(x)
-#print(z)
 x2=numpy.array(x1)   # input
 z=numpy.array([z1]) # output
 
@@ -58,7 +54,7 @@ with tf.Graph().as_default():
     train_op = optimizer.minimize(loss)
         
     
-    init_op = tf.global_variables_initializer()
+    init_op=tf.global_variables_initializer()
     sess=tf.Session()
     sess.run(init_op)
     
@@ -66,24 +62,12 @@ with tf.Graph().as_default():
         feed_dict={iph:x,lph:z} 
         _,val=sess.run([train_op,loss],feed_dict=feed_dict)
         if step % 1000 == 0:
-            print(val)
+            print("error:%s"%(val))
 
-#    W1=sess.run(w1)
-#    print(W1)
-#    W2=sess.run(w2)
-#    print(W2)
-#    B1=sess.run(b1)
-#    print(B1)
-#    B2=sess.run(b2)
-#    print(B2)
 
 #%%
-t = numpy.matmul(W1, x)+B1
-hidden = logistic.cdf(t)
-out = numpy.matmul(W2,hidden)+B2
-#%%
-val = numpy.mean(abs(out-z))
-print(['logistic:',val])
-
-#print(z)
-#print(out)
+#t = numpy.matmul(W1, x)+B1
+#hidden = logistic.cdf(t)
+#out = numpy.matmul(W2,hidden)+B2
+#val = numpy.mean(abs(out-z))
+#print(['logistic error:',val])
