@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Sep 18 20:39:45 2018
-建立一个两层的神经网络进行函数拟合
+建立一个两层的神经网络进行函数拟合。可以进行两种试验。
+没加入噪声的数据，神经网络拟合完美。
+产生的数据加入了噪声，神经网络也几乎可以克服噪声的干扰。
 @author: Allen
 """
 
@@ -9,11 +11,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
-h1_size = 7
-h2_size = 5
+h1_size = 15
+h2_size = 10
 
 x = np.arange(-3, 3, 0.1)
-y = np.sin(x)
+y1 = np.sin(x)
+# 加入噪声
+y = y1 + np.random.randn(len(y1))*0.1
 
 # build graph
 X = tf.Variable(x, dtype=tf.float32, trainable=False)
@@ -42,7 +46,7 @@ loss=tf.reduce_mean(tf.square(model-target))
 #optimizer = tf.train.AdamOptimizer(rate)
 #train_op = optimizer.minimize(loss)
 
-optimizer = tf.train.AdamOptimizer(0.01)
+optimizer = tf.train.AdamOptimizer(0.009)
 grads_and_vars = optimizer.compute_gradients(loss)
 train_op = optimizer.apply_gradients(grads_and_vars)
 
@@ -55,5 +59,7 @@ for step in range(1,80000):
     if step % 1000 == 0:
         print("error:%s"%(val))
 
-plt.plot(x,y)
-plt.plot(x,y2)
+plt.plot(x,y,'g', label='noise')
+plt.plot(x,y1,'k', label='sin')
+plt.plot(x,y2,'r', label='fit')
+plt.legend()
