@@ -6,6 +6,7 @@ mnist for beginner
 
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
+from tensorflow.python.ops.distributions.kullback_leibler import cross_entropy
 
 mnist = input_data.read_data_sets("data/", one_hot=True)
 
@@ -15,8 +16,8 @@ y_ = tf.placeholder(tf.float32, [None, 10])
 W = tf.Variable(tf.zeros([784, 10]))
 b = tf.Variable(tf.zeros([10]))
 
-y = tf.nn.softmax(tf.matmul(x, W) + b)
-cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
+y = tf.matmul(x, W) + b
+cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=y, labels=y_))
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 
 init = tf.global_variables_initializer()
@@ -33,3 +34,4 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
 
+sess.close()
