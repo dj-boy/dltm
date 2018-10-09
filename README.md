@@ -5,3 +5,6 @@
 
 (2) mnist4beginner.py是手写数字识别的最基本程序（一个简单的Softmax regression模型）。可以在http://yann.lecun.com/exdb/mnist/ 下载数据集，也可以在百度网盘https://pan.baidu.com/s/1cLa-mb4wJGNinoHTQsMZjg 下载
 
+（3）资源下载https://pan.baidu.com/s/1lbsC379B5McqaJIQRXT6Pw
+
+
