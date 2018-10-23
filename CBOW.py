@@ -3,10 +3,6 @@ Created on 2018年10月22日
 实现CBOW模型
 @author: Allen
 '''
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 import math
 import os
@@ -241,7 +237,7 @@ with tf.Session(graph=graph) as session:
         if step % 2000 == 0:
             if step > 0:
                 average_loss /= 2000
-      # The average loss is an estimate of the loss over the last 2000 batches.
+    # The average loss is an estimate of the loss over the last 2000 batches.
             print('Average loss at step ', step, ': ', average_loss)
         average_loss = 0
 
@@ -259,7 +255,7 @@ with tf.Session(graph=graph) as session:
                 print(log_str)
     final_embeddings = normalized_embeddings.eval()
 
-  # Write corresponding labels for the embeddings.
+    # Write corresponding labels for the embeddings.
     with open(FLAGS.log_dir + '/metadata.tsv', 'w') as f:
         for i in xrange(vocabulary_size):
             f.write(reverse_dictionary[i] + '\n')
