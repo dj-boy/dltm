@@ -7,4 +7,7 @@
 
 （3）资源下载https://pan.baidu.com/s/1lbsC379B5McqaJIQRXT6Pw
 
+（4）skipgram.py是skipgram模型
+改编自https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/tutorials/word2vec/word2vec_basic.py
 
+（5）CBOW.py是实施的CBOW模型
