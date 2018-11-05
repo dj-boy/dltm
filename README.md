@@ -27,3 +27,5 @@ preprocessor.py提供两个类，vocabulary是将元素文档转换成np的array
 另：
 rt-polarity1.neg和rt-polarity1.pos是两个数据文件。
 在https://nlp.stanford.edu/projects/glove/ 下载GloVe的pretrained Embedding
+
+(6) min-char-rnn-tensorflow.py实现RNN字符级语言模型。需要的数据集是t1.txt
