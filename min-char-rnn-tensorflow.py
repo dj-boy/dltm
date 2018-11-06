@@ -45,11 +45,10 @@ ix_to_char = { i:ch for i,ch in enumerate(chars) }
 
 # parameters
 hidden_size = 100 # size of hidden layer of neurons
-seq_length = 40 # number of steps to unroll the RNN for
+seq_length = 100 # number of steps to unroll the RNN for
 learning_rate = 0.007
-epoch_size = 10
+epoch_size = 50
 batch_size = 1000 # minibatch中的训练数据条数
-init_state = np.random.randn(batch_size, hidden_size)
 mode = 2
 
 #graph
@@ -79,10 +78,11 @@ elif mode==2:
     outputs, state = tf.nn.static_rnn (cell, X, 
                                         initial_state=hstate, dtype=tf.float32)
 
-
 # 重新安排outputs到一个二维结构[batch_size*seq_length, hidden_size]
 # 连续的steps行对应着模型的seq_length个时间步的输出
-new_output = tf.reshape(tf.concat(outputs, 1), [-1, hidden_size])
+outputs_ = tf.transpose(outputs, [1, 0, 2])
+new_output = tf.reshape(tf.concat(outputs_, 1), [-1, hidden_size])
+
 #计算每个time step的输出的loss
 Y = tf.nn.xw_plus_b(new_output, weights['out'], biases['out'])
 T = tf.reshape(target, [-1, vocab_size])
@@ -95,6 +95,7 @@ train_op = optimizer.apply_gradients(grads_and_vars)
 
 # prediction
 pred = tf.argmax(tf.nn.softmax(Y), 1)
+
 # Initializing the variables
 init = tf.global_variables_initializer()
 
@@ -124,15 +125,5 @@ with tf.Session() as sess:
             print(''.join(rs))
         k += 1
     
-    # validation
-#     p=10
-#     s = data_ex[p : p+seq_length]
-#     print(''.join(s))
-#     inputs, _, _ = getBatch(data_ex, 1, seq_length, vocab_size, p)
-#     feed_dict[input]=inputs
-#     t = sess.run([pred], feed_dict)
-#     rs =[ix_to_char[idx] for idx in t[0]]
-#     print(''.join(rs))
-     
         
     
