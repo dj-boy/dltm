@@ -30,7 +30,8 @@ rt-polarity1.neg和rt-polarity1.pos是两个数据文件。
 
 （7）min-char-rnn-tensorflow.py实现RNN字符级语言模型。需要的数据集是t1.txt
 
-（8）LSTM语言模型需要的问题件
+（8）LSTM语言模型需要的文件
+
 ptb-word-lm-simple.py是实现LSTM语言模型的两个文件；
 
 reader.py是训练LSTM语言模型时读取数据集的文件夹。
