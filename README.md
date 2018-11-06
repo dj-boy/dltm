@@ -32,8 +32,8 @@ rt-polarity1.neg和rt-polarity1.pos是两个数据文件。
 
 （8）LSTM语言模型需要的文件
 
-ptb-word-lm-simple.py是实现LSTM语言模型的两个文件；
+ptb-word-lm-simple.py实现LSTM语言模型；
 
-reader.py是训练LSTM语言模型时读取数据集的文件夹。
+reader.py在训练LSTM语言模型时读取数据集的文件夹。
 
 数据集下载在 https://pan.baidu.com/s/16m0gGgojvJgKb2Syjszn_A
