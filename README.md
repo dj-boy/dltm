@@ -36,4 +36,6 @@ ptb-word-lm-simple.py实现LSTM语言模型；
 
 reader.py在训练LSTM语言模型时读取数据集的文件夹。
 
+（9）lstm-sentiment.py是实现的第9章的lstm文本情感分类模型。它需要data_helper.py来读取数据集
+
 数据集下载在 https://pan.baidu.com/s/16m0gGgojvJgKb2Syjszn_A
