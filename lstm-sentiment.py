@@ -98,7 +98,7 @@ for batch in batches:
                 [train_op, loss, accuracy],
                 feed_dict)
     if(k%1000==0):
-        print("loss {:g}, acc{:g}".format(loss_val,acc))
+        print("loss {:g}, acc {:g}".format(loss_val,acc))
     k=k+1
 
 # validation
