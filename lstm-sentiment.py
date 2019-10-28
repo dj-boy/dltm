@@ -70,7 +70,7 @@ mean_output=sum(np_output)/time_step
 W = tf.Variable(tf.random_uniform([hidden_size, num_classes], -1.0, 1.0))
 b = tf.Variable(tf.zeros([num_classes]))
 scores = tf.matmul(mean_output, W) + b 
-loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=scores, labels=input_y))
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=scores, labels=input_y))
 optimizer = tf.train.AdamOptimizer(0.001)
 train_op = optimizer.minimize(loss)
 
